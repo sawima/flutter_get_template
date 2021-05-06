@@ -4,8 +4,10 @@ import 'routers/myRouters.dart';
 import 'config/constants.dart';
 import 'config/themes.dart';
 import 'package:get/get.dart';
+// import 'package:flutter_web_ui/ui.dart' as ui;
+// import 'dart:html';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Hive.initFlutter();
   // await Hive.openBox('kimacloudbox');
