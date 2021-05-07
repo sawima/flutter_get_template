@@ -13,13 +13,22 @@ class InstructionVideo extends StatefulWidget {
 class _InstructionVideoState extends State<InstructionVideo> {
   late VideoPlayerController _videoPlayerController1;
   final HomeController homeController = Get.find();
+  bool isVideoInitialized = false;
   @override
   void initState() {
     super.initState();
     initializePlayer();
-    ever(homeController.instructionVideoUrl, (_){
-      initializePlayer();
-    });
+    // ever(homeController.instructionVideoUrl, (_){
+    //   initializePlayer();
+    // });
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   // mutes the video
+    //   // _videoPlayerController1.setVolume(0);
+    //   // Plays the video once the widget is build and loaded.
+    //   print("After widget rebuild!!!");
+    //   _videoPlayerController1.setLooping(true);
+    //   _videoPlayerController1.play();
+    // });
   }
 
   @override
@@ -28,20 +37,29 @@ class _InstructionVideoState extends State<InstructionVideo> {
     super.dispose();
   }
 
-  Future<void> initializePlayer() async {
-    print("video url");
-    print(homeController.instructionVideoType.value);
-    if(homeController.instructionVideoType.value == "remote") {
-      _videoPlayerController1 =
-          VideoPlayerController.network(homeController.instructionVideoUrl.value);
-    } else {
-      _videoPlayerController1 =
-          VideoPlayerController.asset('assets/videos/video.mp4');
-    }
-    await _videoPlayerController1.initialize();
-    _videoPlayerController1.play();
-    _videoPlayerController1.setLooping(true);
-    setState(() {});
+  void initializePlayer() {
+    // print("video url");
+    // print(homeController.instructionVideoType.value);
+    // if(homeController.instructionVideoType.value == "remote") {
+    //   _videoPlayerController1 =
+    //       VideoPlayerController.network(homeController.instructionVideoUrl.value);
+    // } else {
+    //   _videoPlayerController1 =
+    //       VideoPlayerController.asset('assets/videos/video.mp4');
+    // }
+    _videoPlayerController1 =
+        VideoPlayerController.asset('assets/videos/video.mp4');
+    // _videoPlayerController1 =
+    //     VideoPlayerController.network('https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4');
+
+    _videoPlayerController1.initialize().then((_){
+      print('initialized listener: $_videoPlayerController1');
+      print(_videoPlayerController1.value.isInitialized);
+      print('initialized listener finished: $_videoPlayerController1');
+      setState(() {
+        isVideoInitialized = true;
+      });
+    });
   }
 
   @override
@@ -49,34 +67,29 @@ class _InstructionVideoState extends State<InstructionVideo> {
     return Container(
       height: context.height * 60 /100,
       width: context.width * 60 /100,
-      child:_videoPlayerController1.value.isInitialized
-        ? VideoPlayer(_videoPlayerController1)
-        : Column(
+      child:playBlock(),
+    );
+  }
+  Widget playBlock(){
+    if(isVideoInitialized){
+      _videoPlayerController1.setVolume(0);
+      _videoPlayerController1.setLooping(true);
+      _videoPlayerController1.play();
+      return VideoPlayer(_videoPlayerController1);
+    } else{
+      return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            CircularProgressIndicator(),
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Color(0xffc7de93),
+              ),
+            ),
             SizedBox(height: 20),
-            Text('Loading!!!!!'),
+            Text("加载中",style: TextStyle(color: Colors.white),),
           ]
-        ),
-    );
-    // return Column(
-    //   children: <Widget>[
-    //     Expanded(
-    //       child: Center(
-    //         child:_videoPlayerController1.value.isInitialized
-    //             ? VideoPlayer(_videoPlayerController1)
-    //             : Column(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: const [
-    //                 CircularProgressIndicator(),
-    //                 SizedBox(height: 20),
-    //                 Text('Loading!!!!!'),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    // );
+      );
+    }
   }
 }
+
