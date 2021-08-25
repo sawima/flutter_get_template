@@ -18,15 +18,19 @@ class AppQRCode extends StatelessWidget {
         children: [
           // myQrWidget(androidAppStr,"安卓手机应用下载"),
           Obx(()=>myQrWidget(homeController.androidQRStr.value,"安卓手机应用下载")),
-          SizedBox(width: 20,),
+          SizedBox(width: 40,),
           Obx(()=>myQrWidget(homeController.iosQRStr.value,"苹果手机应用下载")),
           // myQrWidget(iosAppStr,"苹果手机应用下载"),
-          SizedBox(width: 60,),
+          SizedBox(width: 100,),
 
           // Expanded(child: SizedBox()),
-          Obx(()=>myQrWidget(homeController.activateQRStr.value,"激活绑定设备")),
-
-          // myQrWidget(qrStr,"扫一扫，绑定激活设备"),
+          Obx((){
+            if (homeController.registerStatus.value) {
+              return myQrWidget(homeController.activateQRStr.value, "激活绑定设备");
+            } else {
+              return myQrWidget(homeController.registerQRStr.value, "注册硬件");
+            }
+          }),
         ],
       ),
     );

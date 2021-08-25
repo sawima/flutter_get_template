@@ -1,10 +1,12 @@
 class APIUrl {
-  static const String BASE_URL = "https://localhost:8010";
+  static const String BASE_URL = "http://localhost:3002";
   // static const String BASE_URL = "https://api.kimacloud.com/pre";
   // static const String BASE_URL = "http://localhost:3000/test";
 
-  static const String getAppQRStr = BASE_URL + "/getAppQRStr";
-  static const String getActivateQRStr = BASE_URL + "/getActivateQRStr";
+  static const String getAppQRStr = BASE_URL + "/getAppDownloadLink";
+  static const String getActivateQRStr = BASE_URL + "/getTerminalActivateData";
+  static const String internetHealthyCheck = BASE_URL + "/internetHealthyCheck";
+  static const String getRegisterStatus = BASE_URL + "/getRegisterStatus";
 
   // static const String mobileVerifylogin = BASE_URL + "/mobileVerifylogin";
   // static const String newOrg = BASE_URL + "/newOrg";

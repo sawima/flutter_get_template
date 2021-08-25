@@ -1,39 +1,43 @@
 import 'dart:convert';
-// import 'package:http/http.dart' as http;
-// import "apiUrl.dart";
-import 'dart:math';
+import 'package:http/http.dart' as http;
+import "apiUrl.dart";
+// import 'dart:math';
 class ClientAPI {
 
   Future<String> getAppQRStr() async {
-    // final res = await http.post(Uri.parse(APIUrl.getAppQRStr));
-    // final resJson=json.decode(res.body);
+    final res = await http.get(Uri.parse(APIUrl.getAppQRStr));
+    final resJson=json.decode(res.body);
     // return resJson.toString();
-    Map<String,dynamic> appQR ={"android":"android str","ios":"ios str"};
-
-    return jsonEncode(appQR);
+    // Map<String,dynamic> appQR ={"androidQR":"android str","iosQR":"ios str"};
+    return jsonEncode(resJson);
   }
 
   Future<String> getActivateQRStr() async {
-    // final res = await http.post(Uri.parse(APIUrl.getActivateQRStr));
-    // final resJson=json.decode(res.body);
-    // return resJson.toString();
-    Map<String,dynamic> activateQR ={"deviceMAC":"abcdedfh","activateCode":"123123"};
+    final res = await http.get(Uri.parse(APIUrl.getActivateQRStr));
+    final resJson=json.decode(res.body);
+    Map<String,dynamic> activateQR ={"action":"activate","deviceMAC":resJson["deviceMAC"],"activateCode":resJson["activateCode"]};
 
     return jsonEncode(activateQR);
   }
 
   Future<String> updateNetworkStatus() async {
-    // final res = await http.post(Uri.parse(APIUrl.getActivateQRStr));
-    // final resJson=json.decode(res.body);
+    final res = await http.get(Uri.parse(APIUrl.internetHealthyCheck));
+    final resJson=json.decode(res.body);
     // return resJson.toString();
-    Map<String,dynamic> networkStatus ={"connected":true,"message":"网络已经连接"};
-
-    Random random = new Random();
-    int randomNumber = random.nextInt(100);
-
-    if(randomNumber.isOdd){
-     networkStatus ={"connected":false,"message":"网络未连接"};
+    late Map<String,dynamic> networkStatus;
+    if(resJson["success"]){
+      networkStatus ={"connected":true,"message":"网络已经连接","data":resJson["data"]};
+    } else {
+      networkStatus ={"connected":false,"message":"网络未连接"};
     }
+    // Map<String,dynamic> networkStatus ={"connected":true,"message":"网络已经连接"};
+
+    // Random random = new Random();
+    // int randomNumber = random.nextInt(100);
+    //
+    // if(randomNumber.isOdd){
+    //  networkStatus ={"connected":false,"message":"网络未连接"};
+    // }
 
     return jsonEncode(networkStatus);
   }
@@ -63,5 +67,14 @@ class ClientAPI {
     return adStr;
   }
 
+  Future<bool> registerStatus() async {
+    final res = await http.get(Uri.parse(APIUrl.getRegisterStatus));
+    final resJson=json.decode(res.body);
+    if (resJson["data"] == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 }

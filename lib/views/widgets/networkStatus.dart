@@ -8,18 +8,45 @@ class NetworkStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 20),
+      padding: EdgeInsets.only(left:30,right: 30),
       child: Row(
         children: [
+          Obx((){
+            return Text(
+              homeController.registerMsg.value,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
+                  color: Colors.white),
+            );
+          }),
           Spacer(),
           Obx((){
             if(homeController.networkStatus.value){
-              return Text(
-                homeController.networkConnectionStr.value,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    color: Colors.white),
+              return Column(
+                  children: [
+                    Text(
+                      homeController.networkConnectionStr.value,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      homeController.ipAddress.value,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.0,
+                          color: Colors.green),
+                    ),
+                    // Text(
+                    //   homeController.clientID.value,
+                    //   style: TextStyle(
+                    //       fontWeight: FontWeight.bold,
+                    //       fontSize: 12.0,
+                    //       color: Colors.green),
+                    // ),
+                  ]
               );
             } else {
               return Text(

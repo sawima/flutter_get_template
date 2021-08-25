@@ -34,19 +34,16 @@ class _HomePageState extends State<HomePage> {
             width: context.width,
           ),
           Column(children: [
-            NetworkStatus(),
             SizedBox(
-              height: 10.0,
+              height: 20.0,
             ),
+            NetworkStatus(),
             TextTyper(),
-            // SizedBox(
-            //   height: 10.0,
-            // ),
             Center(
               child: InstructionVideo(),
             ),
             SizedBox(
-              height: 30.0,
+              height: 10.0,
             ),
             AppQRCode(),
             // Obx(() => Text(
