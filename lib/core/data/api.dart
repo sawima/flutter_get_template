@@ -48,7 +48,7 @@ class ClientAPI {
     // return resJson.toString();
 
     // Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4"};
-    Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"assets/videos/video.mp4"};
+    Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"assets/videos/demo.mp4"};
 
     return jsonEncode(instructionVideoUrl);
   }
@@ -58,7 +58,7 @@ class ClientAPI {
     // final resJson=json.decode(res.body);
     // return resJson.toString();
     List<String> adStr = [
-      "多种显示屏幕适配，即插即用",
+      "任意显示屏幕适配，即插即用",
       "丰富的应用模版，远程应用推送，及时更新媒体素材",
       "便捷的终端管理软件，支持手机，平板，电脑，网页多终端",
       "云端设备监测，随时查阅设备状态",

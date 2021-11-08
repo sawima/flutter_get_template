@@ -82,7 +82,7 @@ class HomeController extends GetxController {
   }
   @override
   void onClose() {
-    // TODO: implement onClose
+
     timer.cancel();
     super.onClose();
   }

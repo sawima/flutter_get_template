@@ -18,17 +18,6 @@ class _InstructionVideoState extends State<InstructionVideo> {
   void initState() {
     super.initState();
     initializePlayer();
-    // ever(homeController.instructionVideoUrl, (_){
-    //   initializePlayer();
-    // });
-    // WidgetsBinding.instance!.addPostFrameCallback((_) {
-    //   // mutes the video
-    //   // _videoPlayerController1.setVolume(0);
-    //   // Plays the video once the widget is build and loaded.
-    //   print("After widget rebuild!!!");
-    //   _videoPlayerController1.setLooping(true);
-    //   _videoPlayerController1.play();
-    // });
   }
 
   @override
@@ -38,17 +27,8 @@ class _InstructionVideoState extends State<InstructionVideo> {
   }
 
   void initializePlayer() {
-    // print("video url");
-    // print(homeController.instructionVideoType.value);
-    // if(homeController.instructionVideoType.value == "remote") {
-    //   _videoPlayerController1 =
-    //       VideoPlayerController.network(homeController.instructionVideoUrl.value);
-    // } else {
-    //   _videoPlayerController1 =
-    //       VideoPlayerController.asset('assets/videos/video.mp4');
-    // }
     _videoPlayerController1 =
-        VideoPlayerController.asset('assets/videos/video.mp4');
+        VideoPlayerController.asset('assets/videos/demo.mp4');
     // _videoPlayerController1 =
     //     VideoPlayerController.network('https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4');
 
