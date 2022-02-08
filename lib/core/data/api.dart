@@ -26,19 +26,10 @@ class ClientAPI {
     // return resJson.toString();
     late Map<String,dynamic> networkStatus;
     if(resJson["success"]){
-      networkStatus ={"connected":true,"message":"网络已经连接","data":resJson["data"]};
+      networkStatus ={"connected":true,"message":"网络已连接","data":resJson["data"]};
     } else {
-      networkStatus ={"connected":false,"message":"网络未连接"};
+      networkStatus ={"connected":false,"message":"网络未连接","data":null};
     }
-    // Map<String,dynamic> networkStatus ={"connected":true,"message":"网络已经连接"};
-
-    // Random random = new Random();
-    // int randomNumber = random.nextInt(100);
-    //
-    // if(randomNumber.isOdd){
-    //  networkStatus ={"connected":false,"message":"网络未连接"};
-    // }
-
     return jsonEncode(networkStatus);
   }
 

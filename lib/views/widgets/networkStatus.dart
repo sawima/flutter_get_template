@@ -23,6 +23,8 @@ class NetworkStatus extends StatelessWidget {
           Spacer(),
           Obx((){
             if(homeController.networkStatus.value){
+              print("homeController.networkInfo.value.toJson()");
+              print(homeController.networkInfo.value.toJson());
               return Column(
                   children: [
                     Text(
@@ -33,12 +35,26 @@ class NetworkStatus extends StatelessWidget {
                           color: Colors.white),
                     ),
                     Text(
-                      homeController.ipAddress.value,
+                      homeController.networkInfo.value.eth0!.ip!,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 12.0,
                           color: Colors.green),
                     ),
+                    Text(
+                      homeController.networkInfo.value.wifi!.ip!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.0,
+                          color: Colors.green),
+                    ),
+                    // Text(
+                    //   homeController.ipAddress.value,
+                    //   style: TextStyle(
+                    //       fontWeight: FontWeight.bold,
+                    //       fontSize: 12.0,
+                    //       color: Colors.green),
+                    // ),
                     // Text(
                     //   homeController.clientID.value,
                     //   style: TextStyle(
