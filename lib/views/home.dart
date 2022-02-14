@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                     height: 20.0,
                   ),
                   NetworkStatus(),
-                  // TextTyper(),
+                  TextTyper(),
                   Center(
                     child: InstructionVideo(),
                   ),

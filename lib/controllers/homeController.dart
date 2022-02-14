@@ -43,8 +43,8 @@ class HomeController extends GetxController {
 
       final activateObj = json.decode(result);
 
-      if(activateObj["macAddress"]!=null){
-        wifiConfigStr.value = json.encode({"action":"wifiConfig","thingName":activateObj["macAddress"]});
+      if(activateObj["deviceMAC"]!=null){
+        wifiConfigStr.value = json.encode({"action":"wifiConfig","thingName":activateObj["deviceMAC"]});
       } else{
         wifiConfigStr.value = json.encode({"action":"wifiConfig","thingName":"unknown"});
       }

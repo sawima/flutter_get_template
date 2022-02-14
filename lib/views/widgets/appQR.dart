@@ -10,30 +10,26 @@ class AppQRCode extends StatelessWidget {
   final HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-      child: Row(
+    return Obx((){
+      return Container(
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // myQrWidget(androidAppStr,"安卓手机应用下载"),
-          Obx(()=>myQrWidget(homeController.androidQRStr.value,"安卓手机应用下载")),
-          SizedBox(width: 40,),
-          Obx(()=>myQrWidget(homeController.iosQRStr.value,"苹果手机应用下载")),
-          // myQrWidget(iosAppStr,"苹果手机应用下载"),
-          SizedBox(width: 100,),
-
-          // Expanded(child: SizedBox()),
-          Obx((){
-            if (homeController.registerStatus.value) {
-              return myQrWidget(homeController.activateQRStr.value, "激活绑定设备");
-            } else {
-              return myQrWidget(homeController.registerQRStr.value, "注册硬件");
-            }
-          }),
-        ],
-      ),
-    );
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // myQrWidget(androidAppStr,"安卓手机应用下载"),
+            myQrWidget(homeController.androidQRStr.value,"安卓手机应用下载"),
+            SizedBox(width: 40,),
+            myQrWidget(homeController.iosQRStr.value,"苹果手机应用下载"),
+            // myQrWidget(iosAppStr,"苹果手机应用下载"),
+            SizedBox(width: 100,),
+            // Expanded(child: SizedBox()),
+            myQrWidget(homeController.activateQRStr.value, "激活绑定设备"),
+            myQrWidget(homeController.wifiConfigStr.value, "配置无线网络"),
+          ],
+        ),
+      );
+    });
   }
 
   Widget myQrWidget(String qrString,String statementStr){
