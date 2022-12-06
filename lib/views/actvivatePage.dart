@@ -14,6 +14,7 @@ class ActivatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appQRWidth = Get.width/8;
     return DirectionPattern(horizontalWidget: Container(
       height: Get.height,
       width: Get.width,
@@ -24,67 +25,120 @@ class ActivatePage extends StatelessWidget {
         children: [
           NetworkStatus(),
           Container(
-            margin: const EdgeInsets.fromLTRB(300,50,300,50),
+            margin: const EdgeInsets.fromLTRB(300,80,300,50),
             height: Get.height,
             width: Get.width,
-            decoration: BoxDecoration(color: Colors.cyan),
+            // decoration: BoxDecoration(color: Colors.cyan),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("绑定设备",style: TextStyle(fontSize: 48,color: Colors.white),),
-                Card(
-                  child: QrImage(
-                    data: ",asfasdfasdfsadfas fasdfasdfasfasdfasd fasdfsadfsafsafasd",
-                    version: QrVersions.auto,
-                    size: Get.width/5,
-                    gapless: false,
-                  ),
+                Text("激活/绑定设备",style: TextStyle(fontSize: 48,color: Colors.white),),
+                const SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      // height: Get.width/7,
+                      // decoration:BoxDecoration(
+                      //   color: Colors.yellow
+                      // ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Text("设备激活码： XXXXXXXXOOOO",style: TextStyle(fontSize: 28,color: Colors.white),),
+                      Wrap(
+                        direction: Axis.horizontal,
+                        crossAxisAlignment: WrapCrossAlignment.end,
+                        children: [
+                          Text("设备激活码: ",style: TextStyle(fontSize: 28,color: Colors.white),),
+                          Text("XXXXXXXXOOOO",style: TextStyle(fontSize: 32,color: Colors.greenAccent),),
+                        ],
+                      ),
+                          const SizedBox(height: 10,),
+                          Text("1. 打开手机扫一扫功能",style: TextStyle(fontSize: 28,color: Colors.white),),
+                          Text("2. 扫描右侧激活二维码",style: TextStyle(fontSize: 28,color: Colors.white),),
+                          Text("3. 将设备绑定至团队和制定设备位置组",style: TextStyle(fontSize: 28,color: Colors.white),),
+                          Text("4. 尝试投播媒体或部署安装节目应用",style: TextStyle(fontSize: 28,color: Colors.white),),
+                          Text("或者登陆网页端「https://c.1m2.fun」,输入设备激活码",style: TextStyle(fontSize: 28,color: Colors.white),),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 40,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Card(
+                          child: QrImage(
+                            data: ",asfasdfasdfsadfas fasdfasdfasfasdfasd fasdfsadfsafsafasd",
+                            version: QrVersions.auto,
+                            size: Get.width/6,
+                            gapless: false,
+                          ),
+                        ),
+                        Text("扫一扫,设备激活二维码",style: TextStyle(fontSize: 18,color: Colors.white),)
+                      ],
+                    ),
+                  ],
                 ),
-                const Divider(height: 2,color: Colors.white,),
+
+                // const Divider(height: 2,color: Colors.white,),
+                const SizedBox(height: 120,),
                 Container(
                   width: Get.width,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.purple
-                  ),
+                  // height: 300,
+                  // decoration: BoxDecoration(
+                  //   color: Colors.purple
+                  // ),
                   child: Container(
                     // padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
                     width: 800,
                     decoration: BoxDecoration(
                       // color: Colors.white,
-                        border: Border(
-                            left: BorderSide(
-                                color: Colors.white,
-                                width: 2
-                            )
-                        )
+                      //   border: Border(
+                      //       left: BorderSide(
+                      //           color: Colors.white,
+                      //           width: 2
+                      //       )
+                      //   )
                     ),
                     child: Obx((){
                       final androidQRString = homeController.androidQRStr.value;
                       final appleQRString = homeController.iosQRStr.value;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("安卓手机应用",style: TextStyle(fontSize: 42,color: Colors.white),),
-                          const SizedBox(height: 10,),
-                          Card(
-                            child: QrImage(
-                              data: androidQRString,
-                              version: QrVersions.auto,
-                              size: 50,
-                              gapless: false,
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("安卓手机应用",style: TextStyle(fontSize: 42,color: Colors.white),),
+                              const SizedBox(height: 10,),
+                              Card(
+                                child: QrImage(
+                                  data: androidQRString,
+                                  version: QrVersions.auto,
+                                  size: appQRWidth,
+                                  gapless: false,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 40,),
-                          Text("苹果手机应用",style: TextStyle(fontSize: 42,color: Colors.white),),
-                          const SizedBox(height: 10,),
-                          Card(
-                            child: QrImage(
-                              data: appleQRString,
-                              version: QrVersions.auto,
-                              size:  50,
-                              gapless: false,
-                            ),
+                          const SizedBox(width: 80,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("苹果手机应用",style: TextStyle(fontSize: 42,color: Colors.white),),
+                              const SizedBox(height: 10,),
+                              Card(
+                                child: QrImage(
+                                  data: appleQRString,
+                                  version: QrVersions.auto,
+                                  size:  appQRWidth,
+                                  gapless: false,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       );
@@ -94,6 +148,17 @@ class ActivatePage extends StatelessWidget {
               ],
             ),
           ),
+          Positioned(bottom: 10,left: 0,child: Container(
+            height: 120,
+            padding: const EdgeInsets.fromLTRB(0, 0, 20, 10),
+            width: Get.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Image.asset('assets/images/1m2_logo.png'),
+              ],
+            ),
+          ),),
           // Container(
           //   margin: const EdgeInsets.only(top: 400),
           //   height: 200,
