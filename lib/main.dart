@@ -1,3 +1,4 @@
+import 'package:deviceweb/controllers/homeController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'routers/myRouters.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put<HomeController>(HomeController(),permanent: true);
   runApp(MyApp());
 }
 

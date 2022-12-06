@@ -4,7 +4,7 @@
 // import 'package:deviceweb/views/widgets/videoInstruction.dart';
 import 'package:deviceweb/views/components/loading.dart';
 import 'package:deviceweb/views/components/noNetwork.dart';
-import 'package:deviceweb/views/components/scrollPage.dart';
+// import 'package:deviceweb/views/components/scrollPage.dart';
 import 'package:deviceweb/views/widgets/appQR.dart';
 import 'package:deviceweb/views/widgets/networkStatus.dart';
 import 'package:deviceweb/views/widgets/textTyper.dart';
@@ -16,6 +16,11 @@ import 'package:flutter/material.dart';
 // import 'package:qr_flutter/qr_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'connect_network.dart';
+
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 
 // import 'package:video_player_web/video_player_web.dart';
 
@@ -35,10 +40,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return Scaffold(
       body: Obx((){
         if(homeController.loadingStatus.value){
-          if(homeController.networkStatus.value){
+          if(!homeController.networkStatus.value){
             return SingleChildScrollView(
               child: Stack(children: [
                 SvgPicture.asset(
@@ -46,11 +52,11 @@ class _HomePageState extends State<HomePage> {
                   fit: BoxFit.cover,
                   width: context.width,
                 ),
+                NetworkStatus(),
                 Column(children: [
                   SizedBox(
-                    height: 20.0,
+                    height: 60.0,
                   ),
-                  NetworkStatus(),
                   TextTyper(),
                   Center(
                     child: InstructionVideo(),
@@ -59,22 +65,12 @@ class _HomePageState extends State<HomePage> {
                     height: 10.0,
                   ),
                   AppQRCode(),
-                  // Obx(() => Text(
-                  //       "${homeController.stateStr}",
-                  //       style: TextStyle(
-                  //           fontSize: 30,
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Colors.green),
-                  //     )),
-                  // TextButton(
-                  //     onPressed: () => homeController.changeStr(),
-                  //     child: Icon(Icons.ac_unit)),
                 ]),
               ]),
             );
           } else {
-            return NoNetworkPage();
-            // return ScrollPage();
+            // return NoNetworkPage();
+            return ConnectNetworkPage();
           }
         } else {
           return LoadingPage();

@@ -7,6 +7,7 @@ class ClientAPI {
   Future<String> getAppQRStr() async {
     final res = await http.get(Uri.parse(APIUrl.getAppQRStr));
     final resJson=json.decode(res.body);
+    print(resJson);
     // return resJson.toString();
     // Map<String,dynamic> appQR ={"androidQR":"android str","iosQR":"ios str"};
     return jsonEncode(resJson);
@@ -15,32 +16,44 @@ class ClientAPI {
   Future<String> getActivateQRStr() async {
     final res = await http.get(Uri.parse(APIUrl.getActivateQRStr));
     final resJson=json.decode(res.body);
-    Map<String,dynamic> activateQR ={"action":"activate","deviceMAC":resJson["deviceMAC"],"activateCode":resJson["activateCode"]};
-
+    Map<String,dynamic> activateQR ={"act":"ad","code":resJson["activateCode"]};
     return jsonEncode(activateQR);
   }
 
   Future<String> updateNetworkStatus() async {
-    final res = await http.get(Uri.parse(APIUrl.internetHealthyCheck));
-    final resJson=json.decode(res.body);
-    // return resJson.toString();
-    late Map<String,dynamic> networkStatus;
-    if(resJson["success"]){
-      networkStatus ={"connected":true,"message":"网络已连接","data":resJson["data"]};
-    } else {
-      networkStatus ={"connected":false,"message":"网络未连接","data":null};
+    Map<String,dynamic> networkStatus = {"connected":false,"message":"网络未连接","data":null};;
+    try{
+      final res = await http.get(Uri.parse(APIUrl.internetHealthyCheck));
+      final resJson=json.decode(res.body);
+      if(resJson["success"]){
+        networkStatus ={"connected":true,"message":"网络已连接","data":resJson["data"]};
+      }
+    } catch(e){
+      print("xx");
+      throw e;
     }
     return jsonEncode(networkStatus);
   }
+
+  Future<Map<String,dynamic>> getLocalIPAddress() async {
+    final res = await http.get(Uri.parse(APIUrl.getLocalIPAddress));
+    final resJson=json.decode(res.body);
+    late Map<String,dynamic> networkStatus;
+    if(res.statusCode==200){
+      networkStatus =resJson;
+    } else {
+      networkStatus ={};
+    }
+    return networkStatus;
+  }
+
 
   Future<String> getInstructionVideoUrl() async {
     // final res = await http.post(Uri.parse(APIUrl.getActivateQRStr));
     // final resJson=json.decode(res.body);
     // return resJson.toString();
-
     // Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4"};
     Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"assets/videos/demo.mp4"};
-
     return jsonEncode(instructionVideoUrl);
   }
 
@@ -67,5 +80,17 @@ class ClientAPI {
       return false;
     }
   }
+
+  Future<String> getBleServiceName() async {
+    final res = await http.get(Uri.parse(APIUrl.getBleServiceName));
+    final resJson=jsonDecode(res.body);
+    if (resJson["ble"] !=null) {
+      return resJson["ble"];
+    } else {
+      return "";
+    }
+  }
+
+
 
 }

@@ -9,7 +9,7 @@ class HomeController extends GetxController {
   RxString networkConnectionStr = "".obs;
   RxString ipAddress = "127.0.0.1".obs;
   RxString clientID = "".obs;
-  RxString registerQRStr = "".obs;
+  // RxString registerQRStr = "".obs;
   RxString androidQRStr = "".obs;
   RxString iosQRStr = "".obs;
   RxString instructionVideoUrl = "assets/videos/video.mp4".obs;
@@ -18,8 +18,20 @@ class HomeController extends GetxController {
   RxString wifiConfigStr = "".obs;
   RxBool registerStatus = false.obs;
   RxString registerMsg = "未注册".obs;
-  Rx<NetworkModel> networkInfo = NetworkModel().obs;
-  RxBool loadingStatus = false.obs;
+  RxString bleString = "".obs;
+  Rx<NetworkModel> networkInfo = NetworkModel.fromJson({
+    "wifi":{
+      "ip":"0.0.0.0",
+      "mac":"ff:ff:ff:ff:ff",
+      "name":"wifi"
+    },
+    "eth0":{
+      "ip":"0.0.0.0",
+      "mac":"ff:ff:ff:ff:ff",
+      "name":"cable"
+    }
+  }).obs;
+  RxBool loadingStatus = true.obs;
   // RxList<String> adListStr = <String>[].obs;
   RxList<String> adListStr = [
     "多种显示屏幕适配，即插即用!",
@@ -32,17 +44,18 @@ class HomeController extends GetxController {
   late final Timer timer;
 
   HomeController(){
-    // networkInfo.value = NetworkModel.fromJson({"eth0":{"ip":"0.0.0.0","mac":"ff:ff:ff:ff:ff:ff"},"wifi":{"ip":"0.0.0.0","mac":"ff:ff:ff:ff:ff:ff"}});
+    // Future.delayed(const Duration(seconds: 5),(){loadingStatus.value = true;});
     clientApi.getAppQRStr().then((result){
       Map<String,dynamic> appQRResult = jsonDecode(result);
       androidQRStr.value = appQRResult["androidQR"];
       iosQRStr.value = appQRResult["iosQR"];
     });
+    clientApi.getBleServiceName().then((result){
+      bleString.value = result;
+    });
     clientApi.getActivateQRStr().then((result){
       activateQRStr.value = result;
-
       final activateObj = json.decode(result);
-
       if(activateObj["deviceMAC"]!=null){
         wifiConfigStr.value = json.encode({"action":"wifiConfig","thingName":activateObj["deviceMAC"]});
       } else{
@@ -70,33 +83,19 @@ class HomeController extends GetxController {
     });
     clientApi.updateNetworkStatus().then((result){
       Map<String,dynamic> networkResult = jsonDecode(result);
-      print(networkResult);
-      // networkStatus.value = networkResult["connected"] as bool;
-      networkStatus.value = false;
-
+      networkStatus.value = networkResult["connected"] as bool;
       networkConnectionStr.value = networkResult["message"];
-      if(networkResult["data"]!=null){
-        networkInfo.value = NetworkModel.fromJson(networkResult["data"]);
-      }
-      Future.delayed(const Duration(seconds: 3),(){loadingStatus.value = true;});
-
-      // ipAddress.value = networkResult["data"]["ip"];
-      // clientID.value =  networkResult["data"]["mac"].toString().split(":").join();
-      // registerQRStr.value = jsonEncode({"action":"register","clientID":clientID.value});
     });
-    Timer.periodic(Duration(seconds: 600), (timer) {
+    Timer.periodic(Duration(seconds: 10), (timer) async {
       print("interval trigger network status");
-      clientApi.updateNetworkStatus().then((result){
-        Map<String,dynamic> networkResult = jsonDecode(result);
-        networkStatus.value = networkResult["connected"] as bool;
-        networkConnectionStr.value = networkResult["message"];
-        if(networkResult["data"]!=null){
-          networkInfo.value = NetworkModel.fromJson(networkResult["data"]);
-        }
-        // ipAddress.value = networkResult["data"]["ip"];
-        // clientID.value =  networkResult["data"]["mac"].toString().split(":").join();
-        // registerQRStr.value = jsonEncode({"action":"register","clientID":clientID.value});
-      });
+      final networkState = await clientApi.updateNetworkStatus();
+      final ipAddresses = await clientApi.getLocalIPAddress();
+      Map<String,dynamic> networkResult = jsonDecode(networkState);
+      networkStatus.value = networkResult["connected"] as bool;
+      networkConnectionStr.value = networkResult["message"];
+      if(ipAddresses.isNotEmpty){
+        networkInfo.value = NetworkModel.fromJson(ipAddresses);
+      }
     });
   }
 
@@ -106,7 +105,6 @@ class HomeController extends GetxController {
   }
   @override
   void onClose() {
-
     timer.cancel();
     super.onClose();
   }

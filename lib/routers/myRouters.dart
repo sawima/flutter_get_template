@@ -1,6 +1,5 @@
-import 'package:deviceweb/views/network.dart';
-// import 'package:deviceweb/views/pageRouter.dart';
 import 'package:get/get.dart';
+import '../views/connect_network.dart';
 import '../views/home.dart';
 
 class MyRouters{
@@ -10,7 +9,7 @@ class MyRouters{
   // static final String pageRouter= "/";
   static final List<GetPage> getPages = [
     GetPage(name: main, page: () => HomePage()),
-    GetPage(name: network, page: () => NetworkConfigPage()),
+    GetPage(name: network, page: () => ConnectNetworkPage()),
     // GetPage(name: pageRouter, page: () => PageRouterPage()),
   ];
 }

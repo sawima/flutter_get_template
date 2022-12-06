@@ -25,45 +25,78 @@ class NetworkStatus extends StatelessWidget {
             if(homeController.networkStatus.value){
               print("homeController.networkInfo.value.toJson()");
               print(homeController.networkInfo.value.toJson());
+              // return Column(
+              //     children: [
+              //       Text(
+              //         homeController.networkConnectionStr.value,
+              //         style: TextStyle(
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: 18.0,
+              //             color: Colors.white),
+              //       ),
+              //       Text(
+              //         homeController.networkInfo.value.eth0!.ip!,
+              //         style: TextStyle(
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: 12.0,
+              //             color: Colors.green),
+              //       ),
+              //       Text(
+              //         homeController.networkInfo.value.wifi!.ip!,
+              //         style: TextStyle(
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: 12.0,
+              //             color: Colors.green),
+              //       ),
+              //       // Text(
+              //       //   homeController.ipAddress.value,
+              //       //   style: TextStyle(
+              //       //       fontWeight: FontWeight.bold,
+              //       //       fontSize: 12.0,
+              //       //       color: Colors.green),
+              //       // ),
+              //       // Text(
+              //       //   homeController.clientID.value,
+              //       //   style: TextStyle(
+              //       //       fontWeight: FontWeight.bold,
+              //       //       fontSize: 12.0,
+              //       //       color: Colors.green),
+              //       // ),
+              //     ]
+              // );
               return Column(
-                  children: [
-                    Text(
-                      homeController.networkConnectionStr.value,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.white),
-                    ),
-                    Text(
-                      homeController.networkInfo.value.eth0!.ip!,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.0,
-                          color: Colors.green),
-                    ),
-                    Text(
-                      homeController.networkInfo.value.wifi!.ip!,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.0,
-                          color: Colors.green),
-                    ),
-                    // Text(
-                    //   homeController.ipAddress.value,
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.bold,
-                    //       fontSize: 12.0,
-                    //       color: Colors.green),
-                    // ),
-                    // Text(
-                    //   homeController.clientID.value,
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.bold,
-                    //       fontSize: 12.0,
-                    //       color: Colors.green),
-                    // ),
-                  ]
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(padding: EdgeInsets.only(right: 10),child: Text(homeController.networkConnectionStr.value,style: TextStyle(color: Colors.white,fontSize: 24),)),
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment:MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text("有线网络",style: TextStyle(color: Colors.white,fontSize: 16),),
+                                Text(homeController.networkInfo.value.eth0!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
+                                Text("无线网络(${homeController.networkInfo.value.wifi!.name!})",style: TextStyle(color: Colors.white,fontSize: 16),),
+                                Text(homeController.networkInfo.value.wifi!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
               );
+
             } else {
               return Text(
                 homeController.networkConnectionStr.value,
