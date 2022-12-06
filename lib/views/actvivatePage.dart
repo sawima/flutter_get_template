@@ -36,6 +36,7 @@ class ActivatePage extends StatelessWidget {
                 const SizedBox(height: 40,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       // height: Get.width/7,
@@ -60,6 +61,7 @@ class ActivatePage extends StatelessWidget {
                           Text("2. 扫描右侧激活二维码",style: TextStyle(fontSize: 28,color: Colors.white),),
                           Text("3. 将设备绑定至团队和制定设备位置组",style: TextStyle(fontSize: 28,color: Colors.white),),
                           Text("4. 尝试投播媒体或部署安装节目应用",style: TextStyle(fontSize: 28,color: Colors.white),),
+                          const SizedBox(height: 10,),
                           Text("或者登陆网页端「https://c.1m2.fun」,输入设备激活码",style: TextStyle(fontSize: 28,color: Colors.white),),
                         ],
                       ),
@@ -124,7 +126,7 @@ class ActivatePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(width: 80,),
+                          const SizedBox(width: 100,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
