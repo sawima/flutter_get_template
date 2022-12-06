@@ -15,6 +15,7 @@ class ActivatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appQRWidth = Get.width/8;
+    final double mgLR = Get.width/15;
     return DirectionPattern(horizontalWidget: Container(
       height: Get.height,
       width: Get.width,
@@ -25,7 +26,7 @@ class ActivatePage extends StatelessWidget {
         children: [
           NetworkStatus(),
           Container(
-            margin: const EdgeInsets.fromLTRB(300,80,300,50),
+            margin: EdgeInsets.fromLTRB(mgLR,60,mgLR,0),
             height: Get.height,
             width: Get.width,
             // decoration: BoxDecoration(color: Colors.cyan),
@@ -86,7 +87,7 @@ class ActivatePage extends StatelessWidget {
                 ),
 
                 // const Divider(height: 2,color: Colors.white,),
-                const SizedBox(height: 120,),
+                const SizedBox(height: 60,),
                 Container(
                   width: Get.width,
                   // height: 300,
