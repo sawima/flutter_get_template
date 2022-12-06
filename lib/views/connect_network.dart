@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:deviceweb/utils/direction.dart';
 import 'package:get/get.dart';
@@ -18,8 +16,6 @@ class ConnectNetworkPage extends StatelessWidget {
     final qrAreaWidth = (Get.width-100)/2;
     //vertical display
     final storyAreaVWidth = Get.width-100;
-    // final storyAreaVHeight = (Get.height-50)/4;
-    final qrAreaVHeight = (Get.height-50)/2;
     return DirectionPattern(horizontalWidget: Container(
       padding: const EdgeInsets.fromLTRB(50,50,50,0),
       height: Get.height,
@@ -212,9 +208,6 @@ class ConnectNetworkPage extends StatelessWidget {
         const SizedBox(height: 30,),
         Container(
           width: storyAreaVWidth,
-          // decoration: BoxDecoration(
-          //     color: Colors.white
-          // ),
           child: Obx((){
             final androidQRString = homeController.androidQRStr.value;
             final appleQRString = homeController.iosQRStr.value;

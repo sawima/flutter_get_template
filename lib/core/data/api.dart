@@ -21,7 +21,7 @@ class ClientAPI {
   }
 
   Future<String> updateNetworkStatus() async {
-    Map<String,dynamic> networkStatus = {"connected":false,"message":"网络未连接","data":null};;
+    Map<String,dynamic> networkStatus = {"connected":false,"message":"网络未连接","data":null};
     try{
       final res = await http.get(Uri.parse(APIUrl.internetHealthyCheck));
       final resJson=json.decode(res.body);

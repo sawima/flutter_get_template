@@ -8,8 +8,14 @@ class NetworkStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:30,right: 30),
+      height: 150,
+      // decoration: BoxDecoration(
+      //   color: Colors.yellow
+      // ),
+      padding: EdgeInsets.only(left:8,right: 8),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Obx((){
             return Text(
@@ -22,48 +28,6 @@ class NetworkStatus extends StatelessWidget {
           }),
           Spacer(),
           Obx((){
-            if(homeController.networkStatus.value){
-              print("homeController.networkInfo.value.toJson()");
-              print(homeController.networkInfo.value.toJson());
-              // return Column(
-              //     children: [
-              //       Text(
-              //         homeController.networkConnectionStr.value,
-              //         style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //             fontSize: 18.0,
-              //             color: Colors.white),
-              //       ),
-              //       Text(
-              //         homeController.networkInfo.value.eth0!.ip!,
-              //         style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //             fontSize: 12.0,
-              //             color: Colors.green),
-              //       ),
-              //       Text(
-              //         homeController.networkInfo.value.wifi!.ip!,
-              //         style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //             fontSize: 12.0,
-              //             color: Colors.green),
-              //       ),
-              //       // Text(
-              //       //   homeController.ipAddress.value,
-              //       //   style: TextStyle(
-              //       //       fontWeight: FontWeight.bold,
-              //       //       fontSize: 12.0,
-              //       //       color: Colors.green),
-              //       // ),
-              //       // Text(
-              //       //   homeController.clientID.value,
-              //       //   style: TextStyle(
-              //       //       fontWeight: FontWeight.bold,
-              //       //       fontSize: 12.0,
-              //       //       color: Colors.green),
-              //       // ),
-              //     ]
-              // );
               return Column(
                 children: [
                   Row(
@@ -72,40 +36,25 @@ class NetworkStatus extends StatelessWidget {
                       Padding(padding: EdgeInsets.only(right: 10),child: Text(homeController.networkConnectionStr.value,style: TextStyle(color: Colors.white,fontSize: 24),)),
                     ],
                   ),
-                  SizedBox(height: 10,),
-                  Row(
-                    mainAxisAlignment:MainAxisAlignment.end,
+                  SizedBox(height: 5,),
+                  Column(
                     children: [
-                      Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(right: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text("有线网络",style: TextStyle(color: Colors.white,fontSize: 16),),
-                                Text(homeController.networkInfo.value.eth0!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
-                                Text("无线网络(${homeController.networkInfo.value.wifi!.name!})",style: TextStyle(color: Colors.white,fontSize: 16),),
-                                Text(homeController.networkInfo.value.wifi!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("有线网络",style: TextStyle(color: Colors.white,fontSize: 16),),
+                            Text(homeController.networkInfo.value.eth0!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
+                            Text("无线网络(${homeController.networkInfo.value.wifi!.name!})",style: TextStyle(color: Colors.white,fontSize: 16),),
+                            Text(homeController.networkInfo.value.wifi!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ],
               );
-
-            } else {
-              return Text(
-                homeController.networkConnectionStr.value,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    color: Colors.red),
-              );
-            }
           }),
           // Obx(() => Text(
           //   homeController.networkConnectionStr.value,

@@ -8,8 +8,8 @@ import 'package:deviceweb/views/widgets/networkStatus.dart';
 import 'package:deviceweb/views/widgets/textTyper.dart';
 import 'package:deviceweb/views/widgets/videoInstruction.dart';
 
-import 'components/bleNetworkConfig.dart';
 import 'components/registerDevice.dart';
+import 'connect_network.dart';
 
 
 class PageRouterPage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _PageRouterPageState extends State<PageRouterPage> {
           ),
           Obx((){
             if(!homeController.networkStatus.value){
-              return BleNetworkConfigPage();
+              return ConnectNetworkPage();
             } else {
               if(homeController.registerMsg.value=="未注册"){
                 return RegisterDevicePage();
