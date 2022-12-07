@@ -76,15 +76,27 @@ class ClientAPI {
     return adStr;
   }
 
-  Future<bool> registerStatus() async {
-    final res = await http.get(Uri.parse(APIUrl.getRegisterStatus));
+  // Future<bool> registerStatus() async {
+  //   final res = await http.get(Uri.parse(APIUrl.deviceIsInitialized));
+  //   final resJson=json.decode(res.body);
+  //   if (resJson["success"] == true) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  Future<bool> deviceIsActivated() async {
+    final res = await http.get(Uri.parse(APIUrl.deviceIsActivated));
     final resJson=json.decode(res.body);
-    if (resJson["data"] == true) {
+    if (resJson["success"] == true) {
       return true;
     } else {
       return false;
     }
   }
+
+
 
   Future<String> getBleServiceName() async {
     final res = await http.get(Uri.parse(APIUrl.getBleServiceName));

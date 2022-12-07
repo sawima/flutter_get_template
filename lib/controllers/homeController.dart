@@ -16,9 +16,9 @@ class HomeController extends GetxController {
   RxString instructionVideoType = "local".obs;
   RxString activateQRStr = "".obs;
   RxString wifiConfigStr = "".obs;
-  RxBool registerStatus = false.obs;
-  RxString registerMsg = "未注册".obs;
-  RxString bleString = "".obs;
+  RxBool registerStatus = false.obs;   //re-use the registerStatus as activated status
+  RxString registerMsg = "未激活".obs;
+  RxString bleString = "kimacloud-bluetooth".obs;
   Rx<NetworkModel> networkInfo = NetworkModel.fromJson({
     "wifi":{
       "ip":"0.0.0.0",
@@ -92,10 +92,11 @@ class HomeController extends GetxController {
     //   }
     // });
 
-    Timer.periodic(Duration(seconds: 30), (timer) async {
+    Timer.periodic(Duration(seconds: 5), (timer) async {
       print("interval trigger network status");
       final networkState = await clientApi.updateNetworkStatus();
       final ipAddresses = await clientApi.getLocalIPAddress();
+      checkRegisterStatus();
       Map<String,dynamic> networkResult = jsonDecode(networkState);
       networkStatus.value = networkResult["connected"] as bool;
       networkConnectionStr.value = networkResult["message"];
@@ -131,12 +132,24 @@ class HomeController extends GetxController {
   }
 
   Future<void> checkRegisterStatus() async {
-    final result = await clientApi.registerStatus();
+    final result = await clientApi.deviceIsActivated();
     registerStatus.value = result;
     if(result){
-      registerMsg.value = "已注册";
+      registerMsg.value = "已激活";
     }
   }
+
+  // Future<void> deviceIsActivated() async {
+  //   final result = await clientApi.deviceIsActivated();
+  //   // registerStatus.value = result;
+  //   // if(result){
+  //   //   registerMsg.value = "已注册";
+  //   // }
+  // }
+
+
+
+
 
   Future<void> getBleName() async {
     bleString.value = await clientApi.getBleServiceName();
