@@ -1,23 +1,28 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import "apiUrl.dart";
-// import 'dart:math';
 class ClientAPI {
 
   Future<String> getAppQRStr() async {
     final res = await http.get(Uri.parse(APIUrl.getAppQRStr));
     final resJson=json.decode(res.body);
-    print(resJson);
+    // print(resJson);
     // return resJson.toString();
     // Map<String,dynamic> appQR ={"androidQR":"android str","iosQR":"ios str"};
     return jsonEncode(resJson);
   }
 
-  Future<String> getActivateQRStr() async {
+  Future<Map<String,dynamic>> getActivateQRStr() async {
     final res = await http.get(Uri.parse(APIUrl.getActivateQRStr));
     final resJson=json.decode(res.body);
-    Map<String,dynamic> activateQR ={"act":"ad","code":resJson["activateCode"]};
-    return jsonEncode(activateQR);
+    print(resJson);
+    if(resJson!=null){
+      Map<String,dynamic> activateQR ={"act":"ad","code":resJson["activateCode"],"mac":resJson["deviceMAC"]};
+      return activateQR;
+    } else {
+      return {};
+    }
+
   }
 
   Future<String> updateNetworkStatus() async {

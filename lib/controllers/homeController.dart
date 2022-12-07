@@ -31,7 +31,7 @@ class HomeController extends GetxController {
       "name":"cable"
     }
   }).obs;
-  RxBool loadingStatus = true.obs;
+  RxBool loadingStatus = false.obs;
   // RxList<String> adListStr = <String>[].obs;
   RxList<String> adListStr = [
     "多种显示屏幕适配，即插即用!",
@@ -44,31 +44,31 @@ class HomeController extends GetxController {
   late final Timer timer;
 
   HomeController(){
-    // Future.delayed(const Duration(seconds: 5),(){loadingStatus.value = true;});
-    clientApi.getAppQRStr().then((result){
-      Map<String,dynamic> appQRResult = jsonDecode(result);
-      androidQRStr.value = appQRResult["androidQR"];
-      iosQRStr.value = appQRResult["iosQR"];
-    });
-    clientApi.getBleServiceName().then((result){
-      bleString.value = result;
-    });
-    clientApi.getActivateQRStr().then((result){
-      activateQRStr.value = result;
-      final activateObj = json.decode(result);
-      if(activateObj["deviceMAC"]!=null){
-        wifiConfigStr.value = json.encode({"act":"wifi","code":activateObj["deviceMAC"]});
-      } else{
-        wifiConfigStr.value = json.encode({"act":"wifi","code":"unknown"});
-      }
-    });
+    print("home Init!!");
+    // clientApi.getAppQRStr().then((result){
+    //   Map<String,dynamic> appQRResult = jsonDecode(result);
+    //   androidQRStr.value = appQRResult["androidQR"];
+    //   iosQRStr.value = appQRResult["iosQR"];
+    // });
+    // clientApi.getBleServiceName().then((result){
+    //   bleString.value = result;
+    // });
+    // clientApi.getActivateQRStr().then((result){
+    //   activateQRStr.value = result;
+    //   final activateObj = json.decode(result);
+    //   if(activateObj["deviceMAC"]!=null){
+    //     wifiConfigStr.value = json.encode({"act":"wifi","code":activateObj["deviceMAC"]});
+    //   } else{
+    //     wifiConfigStr.value = json.encode({"act":"wifi","code":"unknown"});
+    //   }
+    // });
 
-    clientApi.registerStatus().then((result){
-      registerStatus.value = result;
-      if(result){
-        registerMsg.value = "已注册";
-      }
-    });
+    // clientApi.registerStatus().then((result){
+    //   registerStatus.value = result;
+    //   if(result){
+    //     registerMsg.value = "已注册";
+    //   }
+    // });
 
     clientApi.getADStr().then((result){
       adListStr.value = result;
@@ -81,16 +81,16 @@ class HomeController extends GetxController {
         instructionVideoUrl.value = instructionVideoResult["url"];
       }
     });
-    clientApi.updateNetworkStatus().then((result){
-      Map<String,dynamic> networkResult = jsonDecode(result);
-      networkStatus.value = networkResult["connected"] as bool;
-      networkConnectionStr.value = networkResult["message"];
-    });
-    clientApi.getLocalIPAddress().then((ipAddresses){
-      if(ipAddresses.isNotEmpty){
-        networkInfo.value = NetworkModel.fromJson(ipAddresses);
-      }
-    });
+    // clientApi.updateNetworkStatus().then((result){
+    //   Map<String,dynamic> networkResult = jsonDecode(result);
+    //   networkStatus.value = networkResult["connected"] as bool;
+    //   networkConnectionStr.value = networkResult["message"];
+    // });
+    // clientApi.getLocalIPAddress().then((ipAddresses){
+    //   if(ipAddresses.isNotEmpty){
+    //     networkInfo.value = NetworkModel.fromJson(ipAddresses);
+    //   }
+    // });
 
     Timer.periodic(Duration(seconds: 30), (timer) async {
       print("interval trigger network status");
@@ -106,7 +106,21 @@ class HomeController extends GetxController {
   }
 
   Future<void> getActivateQRStr() async {
-    activateQRStr.value  =await clientApi.getActivateQRStr();
+    final activateData = await clientApi.getActivateQRStr();
+    activateQRStr.value = jsonEncode({
+      "act": activateData["act"],
+      "code":activateData["code"]
+    });
+    // final activateObj = json.decode(activateQRStr.value);
+    print("---------");
+    print(activateData);
+    if(activateData["mac"]!=null){
+      wifiConfigStr.value = json.encode({"act":"wifi","code":activateData["mac"]});
+    } else{
+      wifiConfigStr.value = json.encode({"act":"wifi","code":"unknown"});
+    }
+    print("###");
+    print(wifiConfigStr);
   }
 
   Future<void> getAppQRStr() async {
@@ -114,6 +128,31 @@ class HomeController extends GetxController {
     Map<String,dynamic> appQRResult = jsonDecode(result);
     androidQRStr.value = appQRResult["androidQR"];
     iosQRStr.value = appQRResult["iosQR"];
+  }
+
+  Future<void> checkRegisterStatus() async {
+    final result = await clientApi.registerStatus();
+    registerStatus.value = result;
+    if(result){
+      registerMsg.value = "已注册";
+    }
+  }
+
+  Future<void> getBleName() async {
+    bleString.value = await clientApi.getBleServiceName();
+  }
+
+  Future<void> updateNetworkStatus() async {
+    final result = await clientApi.updateNetworkStatus();
+    Map<String,dynamic> networkResult = jsonDecode(result);
+    networkStatus.value = networkResult["connected"] as bool;
+    networkConnectionStr.value = networkResult["message"];
+  }
+  Future<void> getLocalIPAddress() async {
+    final ipAddresses = await clientApi.getLocalIPAddress();
+    if(ipAddresses.isNotEmpty){
+      networkInfo.value = NetworkModel.fromJson(ipAddresses);
+    }
   }
 
   @override
@@ -125,5 +164,4 @@ class HomeController extends GetxController {
     timer.cancel();
     super.onClose();
   }
-
 }

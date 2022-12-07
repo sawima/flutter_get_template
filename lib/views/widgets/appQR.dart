@@ -12,7 +12,7 @@ class AppQRCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx((){
       return Container(
-        padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,6 +25,7 @@ class AppQRCode extends StatelessWidget {
             SizedBox(width: 100,),
             // Expanded(child: SizedBox()),
             myQrWidget(homeController.activateQRStr.value, "激活绑定设备"),
+            SizedBox(width: 40,),
             myQrWidget(homeController.wifiConfigStr.value, "配置无线网络"),
           ],
         ),
@@ -44,12 +45,12 @@ class AppQRCode extends StatelessWidget {
             child: QrImage(
               data: qrString,
               version: QrVersions.auto,
-              size: 120,
+              size: 150,
               gapless: false,
             ),
           ),
         ),
-        Text(statementStr,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14.0,color: Colors.white),),
+        Text(statementStr,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0,color: Colors.white),),
       ],
     );
   }

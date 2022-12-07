@@ -9,23 +9,10 @@ import 'package:get/get.dart';
 
 import '../utils/direction.dart';
 
-class ActivatePage extends StatefulWidget {
+class ActivatePage extends StatelessWidget {
   ActivatePage({Key? key}) : super(key: key);
 
-  @override
-  State<ActivatePage> createState() => _ActivatePageState();
-}
-
-class _ActivatePageState extends State<ActivatePage> {
   final HomeController homeController = Get.find();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    homeController.getActivateQRStr();
-    homeController.getAppQRStr();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

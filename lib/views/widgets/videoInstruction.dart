@@ -28,7 +28,7 @@ class _InstructionVideoState extends State<InstructionVideo> {
 
   void initializePlayer() {
     _videoPlayerController1 =
-        VideoPlayerController.asset('assets/videos/demo.mp4');
+        VideoPlayerController.asset('assets/videos/device_demo.mp4');
     // _videoPlayerController1 =
     //     VideoPlayerController.network('https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4');
 
@@ -45,8 +45,14 @@ class _InstructionVideoState extends State<InstructionVideo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height * 60 /100,
-      width: context.width * 60 /100,
+      height: (context.width * 60 /100)*9/16,
+      width: context.width * 60 /100-12,
+      decoration: BoxDecoration(
+          border: Border.all(
+            width: 8,
+            color: Colors.black,
+          )
+      ),
       child:playBlock(),
     );
   }

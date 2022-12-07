@@ -8,7 +8,7 @@ class NetworkStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 140,
       // decoration: BoxDecoration(
       //   color: Colors.yellow
       // ),
@@ -21,7 +21,6 @@ class NetworkStatus extends StatelessWidget {
             return Text(
               homeController.registerMsg.value,
               style: TextStyle(
-                  // fontWeight: FontWeight.bold,
                   fontSize: 22.0,
                   color: Colors.white),
             );
