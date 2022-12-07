@@ -57,9 +57,9 @@ class HomeController extends GetxController {
       activateQRStr.value = result;
       final activateObj = json.decode(result);
       if(activateObj["deviceMAC"]!=null){
-        wifiConfigStr.value = json.encode({"action":"wifiConfig","thingName":activateObj["deviceMAC"]});
+        wifiConfigStr.value = json.encode({"act":"wifi","code":activateObj["deviceMAC"]});
       } else{
-        wifiConfigStr.value = json.encode({"action":"wifiConfig","thingName":"unknown"});
+        wifiConfigStr.value = json.encode({"act":"wifi","code":"unknown"});
       }
     });
 
@@ -86,7 +86,13 @@ class HomeController extends GetxController {
       networkStatus.value = networkResult["connected"] as bool;
       networkConnectionStr.value = networkResult["message"];
     });
-    Timer.periodic(Duration(seconds: 10), (timer) async {
+    clientApi.getLocalIPAddress().then((ipAddresses){
+      if(ipAddresses.isNotEmpty){
+        networkInfo.value = NetworkModel.fromJson(ipAddresses);
+      }
+    });
+
+    Timer.periodic(Duration(seconds: 30), (timer) async {
       print("interval trigger network status");
       final networkState = await clientApi.updateNetworkStatus();
       final ipAddresses = await clientApi.getLocalIPAddress();
@@ -97,6 +103,17 @@ class HomeController extends GetxController {
         networkInfo.value = NetworkModel.fromJson(ipAddresses);
       }
     });
+  }
+
+  Future<void> getActivateQRStr() async {
+    activateQRStr.value  =await clientApi.getActivateQRStr();
+  }
+
+  Future<void> getAppQRStr() async {
+    final result  = await clientApi.getAppQRStr();
+    Map<String,dynamic> appQRResult = jsonDecode(result);
+    androidQRStr.value = appQRResult["androidQR"];
+    iosQRStr.value = appQRResult["iosQR"];
   }
 
   @override

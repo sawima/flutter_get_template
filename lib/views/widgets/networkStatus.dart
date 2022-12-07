@@ -21,33 +21,34 @@ class NetworkStatus extends StatelessWidget {
             return Text(
               homeController.registerMsg.value,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
+                  // fontWeight: FontWeight.bold,
+                  fontSize: 22.0,
                   color: Colors.white),
             );
           }),
           Spacer(),
           Obx((){
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(padding: EdgeInsets.only(right: 10),child: Text(homeController.networkConnectionStr.value,style: TextStyle(color: Colors.white,fontSize: 24),)),
+                      Padding(padding: EdgeInsets.only(right: 1),child: Text(homeController.networkConnectionStr.value,style: TextStyle(color: Colors.white,fontSize: 24),)),
                     ],
                   ),
-                  SizedBox(height: 5,),
+                  SizedBox(height: 10,),
                   Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right: 20),
+                        padding: EdgeInsets.only(right: 1),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text("有线网络",style: TextStyle(color: Colors.white,fontSize: 16),),
-                            Text(homeController.networkInfo.value.eth0!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
+                            Text(homeController.networkInfo.value.eth0!.ip!,style: TextStyle(color: Colors.lightGreenAccent,fontSize: 18),),
                             Text("无线网络(${homeController.networkInfo.value.wifi!.name!})",style: TextStyle(color: Colors.white,fontSize: 16),),
-                            Text(homeController.networkInfo.value.wifi!.ip!,style: TextStyle(color: Colors.green,fontSize: 18),),
+                            Text(homeController.networkInfo.value.wifi!.ip!,style: TextStyle(color: Colors.lightGreenAccent,fontSize: 18),),
                           ],
                         ),
                       ),
