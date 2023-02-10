@@ -34,10 +34,11 @@ class HomeController extends GetxController {
   RxBool loadingStatus = false.obs;
   // RxList<String> adListStr = <String>[].obs;
   RxList<String> adListStr = [
-    "多种显示屏幕适配，即插即用!",
+    "多种显示屏幕适配，即插即用",
     "丰富的应用模版，远程应用推送更新",
     "便捷的终端管理软件，支持手机，平板，电脑，网页多终端管理",
     "云端设备监测，随时查阅设备状态",
+    "支持在线应用或定制HTML5实时数据应用"
     // "低功耗硬件，节省运营成本",
   ].obs;
   final clientApi = ClientAPI();

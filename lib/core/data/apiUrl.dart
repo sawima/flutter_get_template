@@ -1,6 +1,6 @@
 class APIUrl {
-  static const String BASE_URL = "http://localhost:3002/";
-  // static const String BASE_URL = "http://192.168.1.4:3002/";
+  // static const String BASE_URL = "http://localhost:3002/";
+  static const String BASE_URL = "http://192.168.31.121:3002/";
   static const String getAppQRStr = BASE_URL + "getAppDownloadLink";
   static const String getActivateQRStr = BASE_URL + "getTerminalActivateData";
   static const String internetHealthyCheck = BASE_URL + "internetHealthyCheck";
