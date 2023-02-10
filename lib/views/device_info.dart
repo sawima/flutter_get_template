@@ -33,7 +33,7 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
               child: Column(children: [
                 TextTyper(),
                 Center(
-                  child: InstructionVideo(),
+                  child: InstructionVideo(isVertical: false,),
                 ),
                 SizedBox(
                   height: 10.0,
@@ -68,14 +68,14 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
           child: Stack(children: [
             NetworkStatus(),
             Container(
-              margin: const EdgeInsets.only(top: 140),
+              margin: const EdgeInsets.only(top: 160),
               child: Column(children: [
                 TextTyper(),
                 Center(
-                  child: InstructionVideo(),
+                  child: InstructionVideo(isVertical: true,),
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 60.0,
                 ),
                 AppQRCode(),
               ]),

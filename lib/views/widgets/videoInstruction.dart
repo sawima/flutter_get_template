@@ -4,6 +4,8 @@ import 'package:video_player/video_player.dart';
 import 'package:get/get.dart';
 
 class InstructionVideo extends StatefulWidget {
+  final bool isVertical;
+  InstructionVideo({Key? key,required this.isVertical}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _InstructionVideoState();
@@ -16,8 +18,8 @@ class _InstructionVideoState extends State<InstructionVideo> {
   bool isVideoInitialized = false;
   @override
   void initState() {
-    super.initState();
     initializePlayer();
+    super.initState();
   }
 
   @override
@@ -29,13 +31,7 @@ class _InstructionVideoState extends State<InstructionVideo> {
   void initializePlayer() {
     _videoPlayerController1 =
         VideoPlayerController.asset('assets/videos/device_demo.mp4');
-    // _videoPlayerController1 =
-    //     VideoPlayerController.network('https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4');
-
     _videoPlayerController1.initialize().then((_){
-      print('initialized listener: $_videoPlayerController1');
-      print(_videoPlayerController1.value.isInitialized);
-      print('initialized listener finished: $_videoPlayerController1');
       setState(() {
         isVideoInitialized = true;
       });
@@ -44,16 +40,25 @@ class _InstructionVideoState extends State<InstructionVideo> {
 
   @override
   Widget build(BuildContext context) {
+    double tvHeight = 100.0;
+    double tvWidth = 100.0;
+    if(!widget.isVertical){
+      tvHeight = (Get.width * 60 /100)*9/16;
+      tvWidth = Get.width * 60 /100-12;
+    } else {
+      tvHeight = (Get.width * 70 /100)*16/9;
+      tvWidth = Get.width * 70 /100-12;
+    }
     return Container(
-      height: (context.width * 60 /100)*9/16,
-      width: context.width * 60 /100-12,
+      height: tvHeight,
+      width: tvWidth,
       decoration: BoxDecoration(
           border: Border.all(
             width: 8,
             color: Colors.black,
           )
       ),
-      child:playBlock(),
+      child:widget.isVertical?Image.asset("assets/images/kimacloud1080x1920.jpeg",fit: BoxFit.fill,):playBlock(),
     );
   }
   Widget playBlock(){

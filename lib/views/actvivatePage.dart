@@ -319,7 +319,7 @@ class ActivatePage extends StatelessWidget {
                             Text("3. 将设备绑定至团队和制定设备位置组",style: TextStyle(fontSize: 28,color: Colors.white),),
                             Text("4. 尝试投播媒体或部署安装节目应用",style: TextStyle(fontSize: 28,color: Colors.white),),
                             const SizedBox(height: 10,),
-                            Text("或者登陆网页端「https://c.1m2.fun」,输入设备激活码",style: TextStyle(fontSize: 28,color: Colors.white),),
+                            Text("或者登陆网页端「https://c.kimacloud.com.cn」,输入设备激活码",style: TextStyle(fontSize: 28,color: Colors.white),),
                           ],
                         ),
                       ),

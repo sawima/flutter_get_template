@@ -135,11 +135,6 @@ class ConnectNetworkPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                // Obx((){
-                //   final activateQRStr = homeController.activateQRStr.value;
-                //   final activateCode = jsonDecode(activateQRStr)["code"];
-                //   return Text("设备终端号: $activateCode",style: TextStyle(fontSize: 18,color: Colors.white),);
-                // }),
                 Image.asset("assets/images/1m2_logo.png")
               ],
             ),

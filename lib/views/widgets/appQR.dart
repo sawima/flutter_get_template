@@ -18,14 +18,14 @@ class AppQRCode extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // myQrWidget(androidAppStr,"安卓手机应用下载"),
-            myQrWidget(homeController.androidQRStr.value,"安卓手机应用下载"),
+            myQrWidget(homeController.androidQRStr.value,"安卓手机应用"),
             SizedBox(width: 40,),
-            myQrWidget(homeController.iosQRStr.value,"苹果手机应用下载"),
+            myQrWidget(homeController.iosQRStr.value,"苹果手机应用"),
             // myQrWidget(iosAppStr,"苹果手机应用下载"),
             SizedBox(width: 100,),
             // Expanded(child: SizedBox()),
-            myQrWidget(homeController.activateQRStr.value, "激活绑定设备"),
-            SizedBox(width: 40,),
+            // myQrWidget(homeController.activateQRStr.value, "激活绑定设备"),
+            // SizedBox(width: 40,),
             myQrWidget(homeController.wifiConfigStr.value, "配置无线网络"),
           ],
         ),
@@ -50,7 +50,7 @@ class AppQRCode extends StatelessWidget {
             ),
           ),
         ),
-        Text(statementStr,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0,color: Colors.white),),
+        Text(statementStr,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22.0,color: Colors.white),),
       ],
     );
   }

@@ -6,9 +6,6 @@ class ClientAPI {
   Future<String> getAppQRStr() async {
     final res = await http.get(Uri.parse(APIUrl.getAppQRStr));
     final resJson=json.decode(res.body);
-    // print(resJson);
-    // return resJson.toString();
-    // Map<String,dynamic> appQR ={"androidQR":"android str","iosQR":"ios str"};
     return jsonEncode(resJson);
   }
 

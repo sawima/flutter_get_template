@@ -58,7 +58,7 @@ class _NoNetworkPageState extends State<NoNetworkPage> {
                         ),
                         // Expanded(child:SizedBox()),
                         SizedBox(height: 10,),
-                        Padding(padding: EdgeInsets.only(bottom: 10),child: Text("网页管理地址：https://c.1m2.fun",style: TextStyle(fontSize: 28,color: Colors.white),),),
+                        Padding(padding: EdgeInsets.only(bottom: 10),child: Text("网页管理地址：https://c.kimacloud.com.cn",style: TextStyle(fontSize: 28,color: Colors.white),),),
                       ],
                     ),
                   ),
@@ -173,7 +173,7 @@ class _NoNetworkPageState extends State<NoNetworkPage> {
                           ),
                         ),
                         SizedBox(height: 10,),
-                        Padding(padding: EdgeInsets.only(bottom: 10),child: Text("网页管理地址：https://c.1m2.fun",style: TextStyle(fontSize: 28,color: Colors.white),),),
+                        Padding(padding: EdgeInsets.only(bottom: 10),child: Text("网页管理地址：https://c.kimacloud.com.cn",style: TextStyle(fontSize: 28,color: Colors.white),),),
                         SizedBox(height: 20,),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,

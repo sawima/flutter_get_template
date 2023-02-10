@@ -50,7 +50,7 @@ class ScrollPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Padding(padding: EdgeInsets.only(bottom: 10),child: Text("网页管理地址：https://c.1m2.fun",style: TextStyle(fontSize: 28,color: Colors.white),),),
+                          Padding(padding: EdgeInsets.only(bottom: 10),child: Text("网页管理地址：https://c.kimacloud.com.cn",style: TextStyle(fontSize: 28,color: Colors.white),),),
                         ],
                       ),
                     ),

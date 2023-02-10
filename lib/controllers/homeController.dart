@@ -112,16 +112,11 @@ class HomeController extends GetxController {
       "act": activateData["act"],
       "code":activateData["code"]
     });
-    // final activateObj = json.decode(activateQRStr.value);
-    print("---------");
-    print(activateData);
     if(activateData["mac"]!=null){
       wifiConfigStr.value = json.encode({"act":"wifi","code":activateData["mac"]});
     } else{
       wifiConfigStr.value = json.encode({"act":"wifi","code":"unknown"});
     }
-    print("###");
-    print(wifiConfigStr);
   }
 
   Future<void> getAppQRStr() async {
