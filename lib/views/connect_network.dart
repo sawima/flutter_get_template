@@ -78,6 +78,20 @@ class ConnectNetworkPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 10,),
                     Text("通过网线连接设备，设备通过自动获取网络地址访问网络",style: TextStyle(fontSize: 20,color: Colors.white),),
+
+                    const SizedBox(height: 50,),
+                    Wrap(
+                      direction: Axis.horizontal,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Icon(Icons.phone_iphone_outlined,size: 48,color: Colors.white,),
+                        SizedBox(width: 8,),
+                        Text("移动应用",style: TextStyle(fontSize: 36,color: Colors.white),),
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Text("安卓手机和平板应用《旷云商显》已经登陆华为/小米/Oppo/Vivo/应用宝等手机应用商店",style: TextStyle(fontSize: 20,color: Colors.white),),
+                    Text("苹果应用商店搜索《旷云商显》安装苹果手机和平板端应用",style: TextStyle(fontSize: 20,color: Colors.white),),
                   ],
                 ),
               ),
@@ -197,6 +211,20 @@ class ConnectNetworkPage extends StatelessWidget {
               ),
               const SizedBox(height: 10,),
               Text("通过网线连接设备，设备通过自动获取网络地址访问网络",style: TextStyle(fontSize: 20,color: Colors.white),),
+
+              const SizedBox(height: 50,),
+              Wrap(
+                direction: Axis.horizontal,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Icon(Icons.phone_iphone_outlined,size: 48,color: Colors.white,),
+                  SizedBox(width: 8,),
+                  Text("移动应用",style: TextStyle(fontSize: 36,color: Colors.white),),
+                ],
+              ),
+              const SizedBox(height: 10,),
+              Text("安卓手机和平板应用《旷云商显》已经登陆华为/小米/Oppo/Vivo/应用宝等手机应用商店",style: TextStyle(fontSize: 20,color: Colors.white),),
+              Text("苹果应用商店搜索《旷云商显》安装苹果手机和平板端应用",style: TextStyle(fontSize: 20,color: Colors.white),),
             ],
           ),
         ),

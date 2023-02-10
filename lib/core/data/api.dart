@@ -31,7 +31,6 @@ class ClientAPI {
         networkStatus ={"connected":true,"message":"网络已连接","data":resJson["data"]};
       }
     } catch(e){
-      print("xx");
       throw e;
     }
     return jsonEncode(networkStatus);
@@ -55,7 +54,7 @@ class ClientAPI {
     // final resJson=json.decode(res.body);
     // return resJson.toString();
     // Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4"};
-    Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"assets/videos/demo.mp4"};
+    Map<String,dynamic> instructionVideoUrl ={"update":true,"source":"remote","url":"assets/videos/device_demo.mp4"};
     return jsonEncode(instructionVideoUrl);
   }
 

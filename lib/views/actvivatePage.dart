@@ -53,9 +53,13 @@ class ActivatePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Obx(() {
-                                final qrStr = jsonDecode(
-                                    homeController.activateQRStr.value);
-                                final activatedCode = qrStr["code"];
+                                final activeQRStr = homeController.activateQRStr.value;
+                                var qrStr = {};
+                                var activatedCode="empty";
+                                if(activeQRStr.isNotEmpty){
+                                  qrStr = jsonDecode(homeController.activateQRStr.value);
+                                  activatedCode =qrStr["code"];
+                                }
                                 return Wrap(
                                   direction: Axis.horizontal,
                                   crossAxisAlignment: WrapCrossAlignment.end,
@@ -101,7 +105,7 @@ class ActivatePage extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                "或者登陆网页端「https://c.1m2.fun」,输入设备激活码",
+                                "或者登陆网页端「https://c.kimacloud.com.cn」,输入设备激活码",
                                 style: TextStyle(
                                     fontSize: 28, color: Colors.white),
                               ),
@@ -209,68 +213,6 @@ class ActivatePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // Container(
-              //   margin: const EdgeInsets.only(top: 400),
-              //   height: 200,
-              //   width: Get.width,
-              //   decoration: BoxDecoration(color: Colors.yellow),
-              // ),
-              // NetworkStatus(),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   children: [
-              //     Builder(builder:(BuildContext context){
-              //       print("obx refresh");
-              //       final networkInfo = homeController.networkInfo.value;
-              //       final networkConnectionStr = homeController.networkConnectionStr.value;
-              //       final ethIP = networkInfo.eth0!.ip!;
-              //       final wifiIP = networkInfo.wifi!.ip!;
-              //       final wifiName = networkInfo.wifi!.name!;
-              //       return Container(
-              //         height: 300,
-              //         width: 300,
-              //         decoration: BoxDecoration(
-              //             color: Colors.yellow
-              //         ),
-              //         child: Column(
-              //           crossAxisAlignment: CrossAxisAlignment.center,
-              //           children: [
-              //             Text(networkConnectionStr,style: TextStyle(color: Colors.white),),
-              //             Text("有线网络",style: TextStyle(color: Colors.white,fontSize: 16),),
-              //             Text(ethIP,style: TextStyle(color: Colors.green,fontSize: 18),),
-              //             Text("无线网络($wifiName)",style: TextStyle(color: Colors.white,fontSize: 16),),
-              //             Text(wifiIP,style: TextStyle(color: Colors.green,fontSize: 18),),
-              //           ],
-              //         ),
-              //       );
-              //     }),
-              //   ],
-              // ),
-              // Positioned(top: 0,right: 0,child: Obx((){
-              //   print("obx refresh");
-              //   final networkInfo = homeController.networkInfo.value;
-              //   final networkConnectionStr = homeController.networkConnectionStr.value;
-              //   final ethIP = networkInfo.eth0!.ip!;
-              //   final wifiIP = networkInfo.wifi!.ip!;
-              //   final wifiName = networkInfo.wifi!.name!;
-              //   return Container(
-              //     height: 300,
-              //     width: 300,
-              //     decoration: BoxDecoration(
-              //         color: Colors.yellow
-              //     ),
-              //     child: Column(
-              //       crossAxisAlignment: CrossAxisAlignment.center,
-              //       children: [
-              //         Text(networkConnectionStr,style: TextStyle(color: Colors.white),),
-              //         Text("有线网络",style: TextStyle(color: Colors.white,fontSize: 16),),
-              //         Text(ethIP,style: TextStyle(color: Colors.green,fontSize: 18),),
-              //         Text("无线网络($wifiName)",style: TextStyle(color: Colors.white,fontSize: 16),),
-              //         Text(wifiIP,style: TextStyle(color: Colors.green,fontSize: 18),),
-              //       ],
-              //     ),
-              //   );
-              // })),
             ],
           ),
         ),
@@ -302,8 +244,13 @@ class ActivatePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Obx((){
-                              final qrStr = jsonDecode(homeController.activateQRStr.value);
-                              final activatedCode =qrStr["code"];
+                              final activeQRStr = homeController.activateQRStr.value;
+                              var qrStr = {};
+                              var activatedCode="empty";
+                              if(activeQRStr.isNotEmpty){
+                                qrStr = jsonDecode(homeController.activateQRStr.value);
+                                activatedCode =qrStr["code"];
+                              }
                               return Wrap(
                                 direction: Axis.horizontal,
                                 crossAxisAlignment: WrapCrossAlignment.end,

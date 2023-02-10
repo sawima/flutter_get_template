@@ -12,7 +12,7 @@ class HomeController extends GetxController {
   // RxString registerQRStr = "".obs;
   RxString androidQRStr = "".obs;
   RxString iosQRStr = "".obs;
-  RxString instructionVideoUrl = "assets/videos/video.mp4".obs;
+  RxString instructionVideoUrl = "assets/videos/device_demo.mp4".obs;
   RxString instructionVideoType = "local".obs;
   RxString activateQRStr = "".obs;
   RxString wifiConfigStr = "".obs;
@@ -45,7 +45,6 @@ class HomeController extends GetxController {
   late final Timer timer;
 
   HomeController(){
-    print("home Init!!");
     // clientApi.getAppQRStr().then((result){
     //   Map<String,dynamic> appQRResult = jsonDecode(result);
     //   androidQRStr.value = appQRResult["androidQR"];
